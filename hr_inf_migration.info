@@ -1,0 +1,5 @@
+name = "Infrastructure Migration"
+description = "Humanitarianresponse infrastructure migration"
+package = "Humanitarianresponse"
+core = 7.x
+

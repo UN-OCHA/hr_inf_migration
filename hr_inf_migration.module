@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_menu_alter().
+ */
+function hr_inf_migration_menu_alter(&$items) {
+  // Disable the user registration page for all users.
+  $items['user/register']['access callback'] = FALSE;
+
+  // Disable the user registration page for all users.
+  $items['user/password']['access callback'] = FALSE;
+
+  // Disable the user login page if disabled.
+  $items['user/login']['page callback'] = 'hr_inf_migration_user_page';
+}
+
+function hr_inf_migration_user_page() {
+  drupal_set_message(t('We are currently in the process of migrating to a new server. As a result, logins are temporarily disabled. Sorry for any inconvenience.'), 'warning');
+  return '';
+}
+
+function hr_inf_migration_init() {
+  if (!user_is_anonymous()) {
+    module_load_include('pages.inc', 'user');
+    user_logout();
+  }
+}
